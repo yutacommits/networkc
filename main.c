@@ -1,3 +1,14 @@
+/*
+Usage: ./a.out google.com
+
+google.com
+Internet Address: 142.250.115.139
+Internet Address: 142.250.115.101
+Internet Address: 142.250.115.138
+Internet Address: 142.250.115.113
+Internet Address: 142.250.115.102
+Internet Address: 142.250.115.100
+*/
 #include <stdio.h>
 #include <netdb.h>
 #include <arpa/inet.h>
