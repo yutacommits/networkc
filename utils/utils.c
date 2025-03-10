@@ -163,7 +163,13 @@ void dg_echo(int sockfd, struct sockaddr *pcli_addr, int maxclilen) {
 
 }
 
-
+/*
+* Read the contents of the FILE *fp write each line to the
+* datagram socket, then read a line back from the datagram
+* socket and write it to the standard output.
+*
+* Return to caller when an EOF is encountered on the input file.
+*/
 void dg_cli(FILE *fp, int sockfd, struct sockaddr *pserv_addr, int servlen) {
     int n;
     char sendline[MAXLINE], recvline[MAXLINE + 1];
@@ -176,7 +182,6 @@ void dg_cli(FILE *fp, int sockfd, struct sockaddr *pserv_addr, int servlen) {
             printf("dg_cli: recvfrom error\n");
         recvline[n] = 0;
         fputs(recvline, stdout);
-
         if (ferror(fp))
             printf("dg_cli: error reading file\n");
     }
