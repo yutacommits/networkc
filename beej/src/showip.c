@@ -1,3 +1,7 @@
+/*
+** showip.c
+** show IP addresses for a host given on the command line
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,18 +11,14 @@
 #include <arpa/inet.h>
 
 
-// int getaddrinfo(const char *node,   // e.g. "www.example.com" or IP
-//                 const char *service,  // e.g. "http" or port number
-//                 const struct addrinfo *hints,
-//                 struct addrinfo **res);
-
 int main(int argc, char *argv[])
 {
     struct addrinfo hints;
-    struct addrinfo *res; // point to results
-    struct addrinfo *p;
     int status;
     char ipstr[INET6_ADDRSTRLEN];
+
+    struct addrinfo *res; // point to results
+    struct addrinfo *p;
 
     if (argc != 2)
     {
@@ -27,12 +27,12 @@ int main(int argc, char *argv[])
     }
 
     memset(&hints, 0, sizeof hints);
-    hints.ai_family = AF_UNSPEC; // IPv4 or IPv6
-    hints.ai_socktype = SOCK_STREAM; // TCP stream sockets
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
 
     if ((status = getaddrinfo(argv[1], NULL, &hints, &res)) != 0)
     {
-        fprintf(stderr, "gai error: %s\n", gai_strerror(status));
+        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(status));
         return 2;
     }
 
